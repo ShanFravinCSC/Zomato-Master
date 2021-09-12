@@ -7,6 +7,9 @@ import { ReviewModel } from "../../database/allModels";
 //Router Setup
 const Router = express.Router();
 
+//Validation
+import { ValidateReviewData } from "../../Validation/review"
+
 /*
 Route   /new
 des     add new review rating
@@ -17,6 +20,7 @@ method   Post
 */
 Router.post("/new", async (req, res) =>{
     try{
+        await ValidateReviewData(req.body);
         const { reviewData } = req.body;
 
         await ReviewModel.create(reviewData);
@@ -36,6 +40,7 @@ method   delete
 */
 Router.delete("/delete/:_id", async (req, res) =>{
     try{
+        await ValidateReviewData(req.body);
         const { _id } = req.params;
 
         await ReviewModel.findByIdAndDelete(_id);

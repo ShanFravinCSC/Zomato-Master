@@ -12,6 +12,9 @@ import { s3Upload } from "../../Utils/s3";
 //Router Setup
 const Router = express.Router();
 
+//Validation
+import { ValidateImageId, ValidateImageFile } from "../../Validation/image";
+
 //multer config
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -25,6 +28,7 @@ Method    GET
 */
 Router.get("/:_id", async (req, res) => {
     try {
+      await ValidateImageId(req.params);
       const image = await ImageModel.findById(req.params._id);
   
       return res.json({ image });
@@ -42,6 +46,7 @@ Method      POST
 */
 Router.post("/", upload.single("file"), async (req, res) => {
     try{
+      await ValidateImageFile(req.file);
 
         const file = req.file;
         

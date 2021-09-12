@@ -8,6 +8,9 @@ import { OrderModel } from "../../database/allModels";
 //Router Setup
 const Router = express.Router();
 
+//Validation
+import { ValidateOrderId, ValidateOrderDetails } from "../../Validation/order"
+
 /*
 Route   /
 des     Get all orders based on id
@@ -17,6 +20,7 @@ method   GET
 */
 Router.get("/_id", async (req, res) =>{
     try{
+        await ValidateOrderId(req.params);
         const { _id } = req.params;
         const getOrders = await OrderModel.findOne({ user: _id });
 
@@ -39,6 +43,8 @@ method   POST
 */
 Router.post("/new/:_id", async(req, res) =>{
     try{
+        await ValidateOrderId(req.params);
+        await ValidateOrderDetails(req.body);
         const { _id } = req.params;
         const { orderDetails } = req.body;
 

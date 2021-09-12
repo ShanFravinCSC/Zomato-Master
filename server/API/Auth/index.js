@@ -10,6 +10,9 @@ import { UserModel } from "../../database/user"
 //Initializing Router
 const Router = express.Router();
 
+//Signup Validation
+import { ValidateSignup, ValidateSignin } from "../../Validation/auth"
+
 /*
 Route   /signup
 des     Register New User
@@ -19,7 +22,10 @@ method   POST
 */
 
 Router.post("/signup", async(req, res) => {
+
     try{
+        await ValidateSignup(req.body.credentials);
+
         await UserModel.findByEmailAndPhone(req.body.credentials);
 
        const newUser = await UserModel.create(req.body.credentials);
@@ -43,6 +49,8 @@ method   POST
 
 Router.post("/signin", async(req, res) => {
     try{
+        await ValidateSignin(req.body.credentials);
+
         const user = await UserModel.findByEmailAndPassword(
             req.body.credentials
         );
