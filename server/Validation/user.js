@@ -9,7 +9,12 @@ export const ValidateUserId = (userId) => {
 
 export const ValidateUserData = (userData) => {
     const Schema = joi.object({
-        userData : joi.string().required(),
+        fullname : joi.string().required(),
+        email : joi.string().required(),
+        address : joi
+                .array()
+                .items(joi.object({detail:joi.string(), for:joi.string()})),
+        phoneNumber : joi.number(),
     });
-    return Schema.validateAsync({ userId });
+    return Schema.validateAsync({ userData });
 };

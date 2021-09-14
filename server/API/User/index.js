@@ -8,6 +8,9 @@ import { UserModel } from "../../database/allModels";
 //Router Setup
 const Router = express.Router();
 
+//Validation
+import { ValidateUserData, ValidateUserId } from "../../Validation/user"; 
+
 /*
 Route   /
 des     Get User Data
@@ -18,6 +21,8 @@ method   GET
 */
 Router.get("/:_id", async (req, res) => {
     try{
+        await ValidateUserId(req.params);
+
         const { _id } = req.params;
         const getUser = await UserModel.findById(_id);
     
@@ -37,6 +42,8 @@ method   put
 */
 Router.put("/:userid", async(req, res) => {
     try{
+        await ValidateUserId(req.params);
+        await ValidateUserData(req.body);
         const { userId } = req.params;
         const { userData } = req.body;
         const updateUserData = await UserModel.findByIdAndUpdate(
