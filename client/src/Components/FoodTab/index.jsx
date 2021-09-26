@@ -92,7 +92,7 @@ const LargeTabs = () =>{
 
     return(
         <>
-            <div className="hidden lg:flex gap-14 container px-20 mx-auto items-center">
+            <div className="hidden lg:flex gap-14 container px-20 mx-auto my-8 items-center">
                 
                 {
                     allTypes.map((items) => (
