@@ -19,7 +19,7 @@ const PictureCarouselCard = () => {
 
             </div>
 
-            <div className="absolute w-full left-4 bottom-2 text-white">
+            <div className="absolute w-full left-6 bottom-2 text-white">
 
                 <h4>Live Sports Screenings</h4>
                 <h6 className="flex items-center">12 Places <IoMdArrowDropright /></h6>
