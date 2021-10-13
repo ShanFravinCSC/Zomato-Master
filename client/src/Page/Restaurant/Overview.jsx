@@ -3,11 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import { IoMdArrowDropright } from "react-icons/io";
 import Slider from 'react-slick';
 import { NextArrow, PrevArrow } from '../../Components/CarouselArrow';
-
+import ReactStars from "react-rating-stars-component";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 //Component
 import MenuCollection from '../../Components/restaurant/MenuCollection';
 import MenuSimilarRestaurantcard from '../../Components/restaurant/MenuSimilarRestaurantcard';
+import ReviewCard from '../../Components/restaurant/Reviews/reviewCard';
 
 const Overview = () => {
     const { id } = useParams();
@@ -21,11 +23,14 @@ const Overview = () => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
       };
+      const ratingChanged = (newRating) => {
+        console.log(newRating);
+      };
 
     return (
         <>
          <div className="flex flex-col md:flex-row relative">
-             <div className="w-full">
+             <div className="w-full md:w-8/12">
                  <h2 className="font-semi-bold text-lg md:text-xl my-4">
                     About This Place
                  </h2>
@@ -64,12 +69,62 @@ const Overview = () => {
                               image="https://b.zmtcdn.com/data/pictures/chains/5/50045/f20767c3f63ceac6ebcf40d4813410d4_featured_v2.jpg?output-format=webp"
                               title="Anjappar"
                             />
+                            <MenuSimilarRestaurantcard 
+                              image="https://b.zmtcdn.com/data/pictures/chains/5/50045/f20767c3f63ceac6ebcf40d4813410d4_featured_v2.jpg?output-format=webp"
+                              title="Anjappar"
+                            />
+                            <MenuSimilarRestaurantcard 
+                              image="https://b.zmtcdn.com/data/pictures/chains/5/50045/f20767c3f63ceac6ebcf40d4813410d4_featured_v2.jpg?output-format=webp"
+                              title="Anjappar"
+                            />
+                            <MenuSimilarRestaurantcard 
+                              image="https://b.zmtcdn.com/data/pictures/chains/5/50045/f20767c3f63ceac6ebcf40d4813410d4_featured_v2.jpg?output-format=webp"
+                              title="Anjappar"
+                            />
                            </Slider>
+                       </div>
+                       <div className="my-4">
+                            <h4 className="text-lg font-medium">Rate your delivery experience</h4>
+                            <ReactStars
+                                count={5}
+                                onChange={ratingChanged}
+                                size={24}
+                                activeColor="#ffd700"
+                            />,
+                       </div>
+                       <div className="my-4 flex flex-col gap-4">
+                            <ReviewCard />
+                            <ReviewCard />
+                            <ReviewCard />
                        </div>
              </div>
              <aside 
                 style={{ height: "fit-content" }}
-                className="hidden md:block md:w-2/5 sticky bg-white p-3 shadow-xl"></aside>
+                className="hidden md:block md:w-4/12 rounded-xl sticky bg-white p-3 shadow-md"
+            >
+                    <div>
+                    <h4 className="text-xl font-medium">Call</h4>
+                    <h5 className="text-zomato-400 font-medium">
+                        +919513444812
+                    </h5>
+                    </div>
+                    <div>
+                        <h4 className="text-xl font-medium">Direction</h4>
+                    <div className="w-full h-48">
+                    <MapContainer center={[12.9619642300,77.6418084651]} zoom={13} scrollWheelZoom={false}>
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                    <Marker position={[12.9619642300,77.6418084651]}>
+                        <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                        </Marker>
+                    </MapContainer>
+                    </div>
+                    </div>
+                </aside>
         </div>  
         </>
     )
