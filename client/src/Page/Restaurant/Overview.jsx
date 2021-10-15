@@ -4,25 +4,53 @@ import { IoMdArrowDropright } from "react-icons/io";
 import Slider from 'react-slick';
 import { NextArrow, PrevArrow } from '../../Components/CarouselArrow';
 import ReactStars from "react-rating-stars-component";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
 
 //Component
 import MenuCollection from '../../Components/restaurant/MenuCollection';
 import MenuSimilarRestaurantcard from '../../Components/restaurant/MenuSimilarRestaurantcard';
 import ReviewCard from '../../Components/restaurant/Reviews/reviewCard';
+import Mapview from '../../Components/restaurant/Mapview';
 
 const Overview = () => {
     const { id } = useParams();
 
     const settings = {
-        arrows: true,
-        infinite: true,
+        dots: true,
+        infinite: false,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        initialSlide: 0,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-      };
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ],
+    };
       const ratingChanged = (newRating) => {
         console.log(newRating);
       };
@@ -92,6 +120,13 @@ const Overview = () => {
                                 activeColor="#ffd700"
                             />,
                        </div>
+                       <div className="my-4 w-full md:hidden flex flex-col gap-4">
+                        <Mapview title="Mumbai Xpress" 
+                            phno="+919513444812" 
+                            mapLocation={[12.9619642300,77.6418084651]}
+                            address="4034, HAL 2nd Stage, 100 Feet Road, Indiranagar, Bangalore"
+                        />    
+                       </div>
                        <div className="my-4 flex flex-col gap-4">
                             <ReviewCard />
                             <ReviewCard />
@@ -100,30 +135,13 @@ const Overview = () => {
              </div>
              <aside 
                 style={{ height: "fit-content" }}
-                className="hidden md:block md:w-4/12 rounded-xl sticky bg-white p-3 shadow-md"
+                className="hidden md:flex md:w-4/12 rounded-xl sticky bg-white p-3 shadow-md flex flex-col gap-4"
             >
-                    <div>
-                    <h4 className="text-xl font-medium">Call</h4>
-                    <h5 className="text-zomato-400 font-medium">
-                        +919513444812
-                    </h5>
-                    </div>
-                    <div>
-                        <h4 className="text-xl font-medium">Direction</h4>
-                    <div className="w-full h-48">
-                    <MapContainer center={[12.9619642300,77.6418084651]} zoom={13} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                    <Marker position={[12.9619642300,77.6418084651]}>
-                        <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                        </Marker>
-                    </MapContainer>
-                    </div>
-                    </div>
+                <Mapview title="Mumbai Xpress" 
+                        phno="+919513444812" 
+                        mapLocation={[12.9619642300,77.6418084651]}
+                        address="4034, HAL 2nd Stage, 100 Feet Road, Indiranagar, Bangalore"
+                />    
                 </aside>
         </div>  
         </>
