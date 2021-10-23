@@ -12,7 +12,7 @@ const Tab = (props) =>{
                 "text-zomato-400 font-semibold": props.isActive,
                 })}
             >
-                <div className="absolute w-full z-20 h-2 border-t-2 border-zomato-400 top-10"/>
+                
                 <h3 className="text-lg md:text-xl">
                     {props.title}
                 </h3>
