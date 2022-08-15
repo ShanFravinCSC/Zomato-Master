@@ -53,7 +53,7 @@ zomato.use("/mail", MailService);
 
 zomato.get("/", (req, res) => res.json({ message: "Setup Success" }));
 
-zomato.listen(4000, () => 
+zomato.listen(4003, () => 
 ConnectDB()
     .then (() => console.log("Server is running"))
     .catch(() => 

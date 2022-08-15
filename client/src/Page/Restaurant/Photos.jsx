@@ -8,6 +8,10 @@ const Photos = () => {
     const [photos, setPhotos] = useState
                                     (["https://b.zmtcdn.com/data/pictures/1/19170081/f256137cc40af547a542f7ca4b37dbd7.jpg",
                                         "https://b.zmtcdn.com/data/pictures/1/19170081/39733a51923278db60c04cbca093dea7.jpg",
+                                        "https://b.zmtcdn.com/data/pictures/1/19170081/39733a51923278db60c04cbca093dea7.jpg",
+                                        "https://b.zmtcdn.com/data/pictures/1/19170081/39733a51923278db60c04cbca093dea7.jpg",
+                                        "https://b.zmtcdn.com/data/pictures/1/19170081/39733a51923278db60c04cbca093dea7.jpg",
+                                        "https://b.zmtcdn.com/data/pictures/1/19170081/39733a51923278db60c04cbca093dea7.jpg",
                                     ]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [CurrentImg, setCurrentImg] = useState(0);
