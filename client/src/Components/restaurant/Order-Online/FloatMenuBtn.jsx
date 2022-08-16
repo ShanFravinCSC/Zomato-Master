@@ -11,7 +11,7 @@ const FloatMenuBtn = () => {
     const toggleMenu = () => setIsClicked((prev) => !prev);
     return (
         <>
-            <div className="fixed z-30 bottom-2 flex flex-col gap-3 items-end bottom-2 right-2 md:hidden">
+            <div className="fixed z-30 bottom-2 flex flex-col gap-3 items-end bottom-16 right-2 md:hidden">
                 { isClicked && (<div className="p-3 bg-white h-48 overflow-y-scroll">
                     <MenuListContainer />
                 </div>)}
